@@ -29,9 +29,7 @@
     }];
     
     [self addActionWithButonName:@"ボタン1"
-                    buttonAction:^{
-        NSLog(@"ボタン1");
-    }];
+                    buttonAction:nil];
     
     [self addActionWithButonName:@"ボタン2"
                     buttonAction:^{

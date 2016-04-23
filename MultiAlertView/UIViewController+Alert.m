@@ -88,15 +88,25 @@ NSMutableArray<AlertAction> *alertActionList;
         UIAlertAction *action = [UIAlertAction actionWithTitle:alertCancelBtnTitle
                                                          style:UIAlertActionStyleCancel
                                                        handler:^(UIAlertAction * _Nonnull action) {
-                                                           buttonAction();
+                                                           
+                                                           if (buttonAction) {
+                                                               buttonAction();
+                                                           }
                                                        }];
         [alert addAction:action];
     } else {
         
-        // アクション用の変数に引数で来たアクションを格納
-        AlertAction action = buttonAction;
-        // 配列に格納
-        [alertActionList addObject:action];
+        if (buttonAction) {
+            // アクション用の変数に引数で来たアクションを格納
+            AlertAction action = buttonAction;
+            // 配列に格納
+            [alertActionList addObject:action];
+        } else {
+            // アクションが無い場合はからブロックを設定
+            [alertActionList addObject:^{}];
+        }
+        
+
     }
 }
 
@@ -115,16 +125,24 @@ NSMutableArray<AlertAction> *alertActionList;
         UIAlertAction *action = [UIAlertAction actionWithTitle:buttonName
                                                          style:UIAlertActionStyleDefault
                                                        handler:^(UIAlertAction * _Nonnull action) {
-                                                           buttonAction();
+                                                           if (buttonAction) {
+                                                               buttonAction();
+                                                           }
                                                        }];
         [alert addAction:action];
     } else {
         [alert addButtonWithTitle:buttonName];
         
-        // アクション用の変数に引数で来たアクションを格納
-        AlertAction action = buttonAction;
-        // 配列に格納
-        [alertActionList addObject:action];
+        if (buttonAction) {
+            // アクション用の変数に引数で来たアクションを格納
+            AlertAction action = buttonAction;
+            // 配列に格納
+            [alertActionList addObject:action];
+        } else {
+            [alertActionList addObject:^{}];
+        }
+        
+
     }
 }
 
